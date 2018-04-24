@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<!--Dev: Lani, SmartMirror IndexHtmlFile
+Moniter type=4:3, vertical-->
+<html lang="ko">
+    <head>
+        <script src="script/jquery/jquery-3.2.1.min.js" type="text/javascript"></script>
+        <script src="script/js/script.js" type="text/javascript"></script>
+        
+        <title>DaegeonSmartMirror</title>
+        <link href="css/index.css" type="text/css" rel="stylesheet"/>
+    </head>
+    <body onload="loader()">
+        <header>
+                <div id="allTime">
+                <div id="Year"></div>
+                <div id="year"></div>
+                <div id="MonthDay"></div>
+                <div id="day"></div>
+                <div id="time"></div>
+            </div>
+            <div id="weatherComp">
+                <div id="weather1">
+                    <div id="nowWeather">현재날씨</div>
+                    <div id="weatherSta">Loading</div>
+                    <div id="degreeSta">Loading</div>
+                </div>
+                <div id="weather2">
+                    <div id="nextWeather">내일날씨</div>
+                    <div id="weatherNex">Loading</div>
+                    <div id="degreeNex">Loading</div>
+                </div>
+            </div>
+        </header>
+        <section id="main">
+            <video width="750" height="auto" autoplay controls id="videoPlayer" class = "center">
+                <source src="media/1.mp4" type="video/mp4">
+            </video>
+            <div class="imgRotate">
+<!--
+                <img src="img/1.png"/>
+                <img src="img/2.png"/>
+-->
+            </div>
+        </section>
+        <footer>
+            <div class="footerRotate">
+                <div id="cumchuk">
+                    <ul>
+                        <li>
+                            <h2>조식</h2>
+                            <div id="breakfast">
+                                Loading
+                            </div>
+                        </li>
+                        <li>
+                            <h2>중식</h2>
+                            <div id="lunch">
+                                Loading
+                            </div>
+                        </li>
+                        <li>
+                            <h2>석식</h2>
+                            <div id="dinner">
+                                Loading
+                            </div>
+                        </li>
+                    </ul>   
+                </div>
+            </div>
+            <div class="footerRotate">
+                <div class="title">D-Day</div>
+                <div id="dDay1">
+                    수능 D-<div id="doomsDay1">Loading</div>
+                </div>
+                <div id="dDay2">
+                    사관학교 D-<div id="doomsDay2">Loading</div>
+                </div>
+                <div id="event1">
+                    <div id="date1">
+                        Loading
+                    </div>
+                    <div id="script1">
+                        Loading
+                    </div>
+                </div>
+                <div id="event2">
+                    <div id="date2">
+                        Loading
+                    </div>
+                    <div id="script2">
+                        Loading
+                    </div>
+                </div>
+                <div id="event3">
+                    <div id="date3">
+                        Loading
+                    </div>
+                    <div id="script3">
+                        Loading
+                    </div>
+                </div>
+            </div>
+            <div class="powered">Powered By Aegis ⓒ With Lani, @, Jyan; Ver 0.1.4</div>
+        </footer>
+    <script src="script/js/index.js" type="text/javascript"></script>
+    </body>
+</html>
