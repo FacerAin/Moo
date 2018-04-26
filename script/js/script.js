@@ -8,7 +8,7 @@ function loader(){
     setInterval('parseWeather()',72000000);//2시간 인터벌
     parseNextWeather();
     setInterval('parseNextWeather()',72000000);//2시간 인터벌
-    videoPlayer();//비디오 플레이어
+    setTimeout('videoPlayer()',3000)//비디오 플레이. 속성 받아오기위해 시간차.
     doomsDayShow();
     setInterval('doomsDayShow',72000000);//2시간 인터벌
     doomsDayShow1();
@@ -213,6 +213,7 @@ function translator(input){
             }
 }
 function videoPlayer(){
+    console.log("비디오개수는"+mp4Count);
     var videoCount=mp4Count;//비디오 개수를 의미
     var mediaRoot="media/";
     var nextVideo=[];
