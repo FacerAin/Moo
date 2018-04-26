@@ -1,5 +1,6 @@
-var localIp="localhost";//node.js 주소
+﻿var localIp="localhost";//node.js 주소
 jQueryCall=null;//js로 jQuery를 실행하기 위함.
+var mp4Count;
 function loader(){
     timer();
     setInterval('rice()', 72000000);//2시간 인터벌
@@ -16,20 +17,12 @@ function loader(){
     setInterval('parseMealChecker()',10000);//10초 인터벌
     eventDelay();
     setInterval('event()',72000000);
-    getConfig(5);
-    jQueryCall(1);//jQuery에 데이터 전달용
+    getConfig();
 }
 function getDateInit(){
     return new Date();
 }
-function getConfig(param){
-    var mp4Count;
-    var pngCount;
-    if(param==1){//1일때 비디오카운트
-        return mp4Count;
-    }else if(param==2){//2일때 사진카운트
-        return pngCount;
-    }
+function getConfig(){
             {
                   loadJSON(function(response)
                   {
@@ -37,6 +30,8 @@ function getConfig(param){
                       mp4Count=jsonData["mp4Count"];
                       pngCount=jsonData["pngCount"];
                       console.log(mp4Count);
+                      console.log(pngCount);
+                      jQueryCall(pngCount);
                   });
 
             }
@@ -218,7 +213,7 @@ function translator(input){
             }
 }
 function videoPlayer(){
-    var videoCount=getConfig(1);//비디오 개수를 의미
+    var videoCount=mp4Count;//비디오 개수를 의미
     var mediaRoot="media/";
     var nextVideo=[];
     for(var i=1; i<=videoCount; i++)
@@ -370,31 +365,6 @@ function event(){
            function loadJSON(callback) //url의 json 데이터 불러오는 함수
            {
               var url = "http://"+localIp+":53333";
-              var request = new XMLHttpRequest();;
-              request.overrideMimeType("application/json");
-              request.open('GET', url, true);
-              request.onreadystatechange = function ()
-              {
-                if (request.readyState == 4 && request.status == "200")
-                {
-                  callback(request.responseText);
-                }
-              };
-              request.send(null);
-          }
-}
-function getConfig(){
-            {
-                  loadJSON(function(response)
-                  {
-                      var jsonData = JSON.parse(response);
-                      jQueryCall();//jQuery에 데이터 전달용
-                  });
-
-            }
-           function loadJSON(callback) //url의 json 데이터 불러오는 함수
-           {
-              var url = "http://"+localIp+":53335";
               var request = new XMLHttpRequest();;
               request.overrideMimeType("application/json");
               request.open('GET', url, true);

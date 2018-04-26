@@ -1,4 +1,4 @@
-var i = 0;
+﻿var i = 0;
 init();
 function init(){
     $(".footerRotate").eq(i).fadeOut("slow");
@@ -27,19 +27,19 @@ function loaderRotate(){
     setTimeout('loaderRotate()',10000);//setInterval은 이벤트 딜레이 있음. 재귀함수 구성.
     
 }
+var imgCount;
 $(function(){
     function jQueryCalled(imgNum){
         console.log("jQueryCalled");
         imgCount=imgNum;
+        console.log(imgCount);
     }
     jQueryCall=jQueryCalled;
+    for(var imgord=1; imgord<=3; imgord++)
+    {
+        $("<img src=\"../../img/"+imgord+".png\" alt=slide"+imgord+">").appendTo($(".imgRotate"));
+    }
 });
-for(var imgord=1; imgord<5; imgord++)
-{
-    $("#imgRotate").append("<img scr="+imgord+".png");
-    console.log("IDSF0");
-}
-$(".imgRotate").append("<img scr=\""+1+"\".png>");
 var index=0;
 var imgCount=2;
 var timeDelay=5000;
