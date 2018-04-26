@@ -5,7 +5,7 @@ function loader(){
     timer();
     setInterval('rice()', 72000000);//2시간 인터벌
     parseWeather();
-    setInterval('parseWeather()',72000000);//2시간 인터벌
+    setInterval('parseWeather()',600000);//1분 인터벌
     parseNextWeather();
     setInterval('parseNextWeather()',72000000);//2시간 인터벌
     setTimeout('videoPlayer()',3000)//비디오 플레이. 속성 받아오기위해 시간차.

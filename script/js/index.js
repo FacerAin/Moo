@@ -42,7 +42,7 @@ $(function(){
 });
 var index=0;
 var imgCount=2;
-var timeDelay=5000;
+var timeDelay=10000;
 $(".imgRotate img").eq(index).css("left","0");
 index++;
 setTimeout('imgRotate()',timeDelay);
