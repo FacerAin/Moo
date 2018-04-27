@@ -37,7 +37,7 @@ $(function(){
     jQueryCall=jQueryCalled;
     for(var imgord=1; imgord<=3; imgord++)
     {
-        $("<img src=\"../../img/"+imgord+".png\" alt=slide"+imgord+">").appendTo($(".imgRotate"));
+        $("<img src=\"./../../img/"+imgord+".png\" alt=slide"+imgord+">").appendTo($(".imgRotate"));
     }
 });
 var index=0;
