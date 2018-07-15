@@ -3,11 +3,8 @@ jQueryCall=null;//js로 jQuery를 실행하기 위함.
 var mp4Count;
 function loader(){
     timer();
-    setInterval('rice()', 72000000);//2시간 인터벌
     parseWeather();
-    setInterval('parseWeather()',600000);//1분 인터벌
     parseNextWeather();
-    setInterval('parseNextWeather()',72000000);//2시간 인터벌
     setTimeout('videoPlayer()',3000)//비디오 플레이. 속성 받아오기위해 시간차.
     doomsDayShow();
     setInterval('doomsDayShow',72000000);//2시간 인터벌
@@ -16,8 +13,8 @@ function loader(){
     parseMealChecker();
     setInterval('parseMealChecker()',10000);//10초 인터벌
     eventDelay();
-    setInterval('event()',72000000);
     getConfig();
+    volumeController();
 }
 function getDateInit(){
     return new Date();
@@ -29,8 +26,8 @@ function getConfig(){
                       var jsonData = JSON.parse(response);
                       mp4Count=jsonData["mp4Count"];
                       pngCount=jsonData["pngCount"];
-                      console.log(mp4Count);
-                      console.log(pngCount);
+                      console.log("MP4COUNT_"+mp4Count);
+                      console.log("PNGCOUNT_"+pngCount);
                       jQueryCall(pngCount);
                   });
 
@@ -39,7 +36,6 @@ function getConfig(){
            {
               var url = "http://"+localIp+":53335";
               var request = new XMLHttpRequest();
-               console.log("req");
               request.overrideMimeType("application/json");
               request.open('GET', url, true);
               request.onreadystatechange = function ()
@@ -123,6 +119,7 @@ function parseWeather(){
               };
               request.send(null);
           }
+    setTimeout(parseWeather, 10000);
 }
 function parseNextWeather(){
             {
@@ -146,9 +143,6 @@ function parseNextWeather(){
                               day="0"+day;
                           }
                       var query=year+"-"+month+"-"+day+" 12:00:00";
-                      console.log(query);
-                      console.log(jsonData["list"][10]["dt_txt"]);
-                      console.log(query==jsonData["list"][10]["dt_txt"]);
                       var i=0;
                       var rep=0;
                       while(rep<50)
@@ -182,6 +176,7 @@ function parseNextWeather(){
               };
               request.send(null);
           }
+    setTimeout(parseNextWeather, 50000)
 }
 function translator(input){
     var weather;
@@ -213,7 +208,6 @@ function translator(input){
             }
 }
 function videoPlayer(){
-    console.log("비디오개수는"+mp4Count);
     var videoCount=mp4Count;//비디오 개수를 의미
     var mediaRoot="media/";
     var nextVideo=[];
@@ -299,7 +293,6 @@ function parseMealChecker(){
     var firstExe=true;
     var i;
     var time=getDateInit();
-    console.log(time.getHours());
     if(time.getHours()>=19 && virgin){
         parseMeal(1);
         virgin=false;
@@ -338,7 +331,6 @@ function parseMeal(ary){
               {
                 if (request.readyState == 4 && request.status == "200")
                 {
-                    console.log("readystate");
                   callback(request.responseText);
                 }
               };
@@ -354,12 +346,32 @@ function event(){
                   loadJSON(function(response)
                   {
                       var jsonData = JSON.parse(response);
-                      document.getElementById("date1").innerHTML=jsonData[0]["date"]+"&nbsp;|";
-                      document.getElementById("script1").innerHTML=jsonData[0]["summary"];
-                      document.getElementById("date2").innerHTML=jsonData[1]["date"]+"&nbsp;|";
-                      document.getElementById("script2").innerHTML=jsonData[1]["summary"];
-                      document.getElementById("date3").innerHTML=jsonData[2]["date"]+"&nbsp;|";
-                      document.getElementById("script3").innerHTML=jsonData[2]["summary"];
+                      var univ='[';//입시설명회변수
+                      var common='[';//입설 제외
+                      for(var i=0; jsonData[i]!=null; i++){
+                          if(jsonData[i]["summary"].indexOf("입시설명회")!=-1){
+                              univ+=('{\"date\":'+'\"'+jsonData[i]["date"]+'\"'+', \"summary\":'+'\"'+jsonData[i]["summary"]+'\"'+'},');
+                          }
+                           else{
+                               common+=('{\"date\":'+'\"'+jsonData[i]["date"]+'\"'+', \"summary\":'+'\"'+jsonData[i]["summary"]+'\"'+'},');
+                           }
+                      }
+                      univ+=('{}]');
+                      common+=('{}]');
+                      univData=JSON.parse(univ);
+                      commonData=JSON.parse(common);
+                      document.querySelector("#event1 #date1").innerHTML=commonData[0]["date"]+"&nbsp;|";
+                      document.querySelector("#event1 #script1").innerHTML=commonData[0]["summary"];
+                      document.querySelector("#event2 #date2").innerHTML=commonData[1]["date"]+"&nbsp;|";
+                      document.querySelector("#event2 #script2").innerHTML=commonData[1]["summary"];
+                      document.querySelector("#event3 #date3").innerHTML=commonData[2]["date"]+"&nbsp;|";
+                      document.querySelector("#event3 #script3").innerHTML=commonData[2]["summary"];
+                      document.querySelector("#univ1 #date").innerHTML=univData[0]["date"]+"&nbsp;|";
+                      document.querySelector("#univ1 #script").innerHTML=univData[0]["summary"];
+                      document.querySelector("#univ2 #date").innerHTML=univData[1]["date"]+"&nbsp;|";
+                      document.querySelector("#univ2 #script").innerHTML=univData[1]["summary"];
+                      document.querySelector("#univ3 #date").innerHTML=univData[2]["date"]+"&nbsp;|";
+                      document.querySelector("#univ3 #script").innerHTML=univData[2]["summary"];
                   });
 
             }
@@ -378,4 +390,18 @@ function event(){
               };
               request.send(null);
           }
+    setTimeout('event()',10000);
+}
+
+function volumeController(){
+    var volumeControl=document.getElementById("videoPlayer");
+    var time=getDateInit();
+    volumeControl.volume=0;
+    console.log(time.getMinutes())
+    if((time.getHours()>=23) && (time.getMinutes()>=2))
+        {
+            console.log("fdsdfs");
+            volumeControl.volume=1;
+        }
+    setTimeout('volumeController()',1000);
 }

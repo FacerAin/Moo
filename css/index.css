@@ -8,7 +8,7 @@
 }
 body{
     background-color: black;
-    width: 700px;
+    width: 820px;
     height: 1360px;
     border: solid red 1px;
 }
@@ -68,15 +68,16 @@ header #weather1 #degreeSta{
 }
 #videoPlayer{
     margin-top: 20px;
-    width: 700px;
+    width: 820px;
 }
 .imgRotate{
-    width: 700px;
+    width: 820px;
     margin-top: 50px;
     height: 320px;
 }
 .imgRotate img{
     position: absolute;
+    width: 820px;
     transition: all 2s;
 }
 .footerRotate>#cumchuk{
@@ -106,48 +107,63 @@ footer{
     font-size: 20px;
 }
 .footerRotate #cumchuk ul li:nth-child(2){
-    margin-left: 130px;
+    position: relative;
+    left: 80px;
 }
 .footerRotate #cumchuk ul li:nth-child(3){
-    margin-left: 130px;
+    position: relative;
+    left: 180px;
 }
-.footerRotate .title{
-    position: absolute;
+.title{
+    position: relative;
     font-size: 30px;
-    top: 1100px;
+    top: 100px;
     left: 20px;
     font-weight: 700;
 }
-.footerRotate #dDay1{
-    position: absolute;
+#dDay1{
+    position: relative;
     font-size: 30px;
-    top: 1200px;
-    left: 20px;
+    top: 68px;
+    left: 150px;
+    width: 300px;
 }
-.footerRotate #dDay2{
-    position: absolute;
+#dDay2{
+    position: relative;
     font-size: 30px;
-    top: 1250px;
-    left: 20px;
+    top: 35px;
+    left: 350px;
+    width: 200px;
 }
-.footerRotate #dDay1 #doomsDay1{
+#dDay1 #doomsDay1{
     position: absolute;
     font-size: 30px;
     left: 105px;
     top: 0px;
     
 }
-.footerRotate #dDay2 #doomsDay2{
+#dDay2 #doomsDay2{
     position: absolute;
     font-size: 30px;
     top: 1px;
     left: 165px;
 }
+.footerRotate #event{
+    position: relative;
+    top: 100px;
+}
+.footerRotate #commonPlan{
+    position: relative;
+    left: 445px;
+    top: 20px;
+    font-size: 26px;
+    width: 100px;
+}
 .footerRotate #event1{    //이벤트1
-    position: absolute;
+    position: relative;
     font-size: 18px;
-    margin-top: 300px;
     margin-left:460px;
+    margin-top: 30px;
 }
 .footerRotate #event1 #date1{
     position: relative;
@@ -186,6 +202,64 @@ footer{
     
 }
 .footerRotate #event3 #script3{
+    position: relative;
+    top: -23px;
+    left: 120px;
+}
+.footerRotate #university{
+    position: relative;
+    left: -200px;
+    top: 80px;
+}
+.footerRotate #univPlan{
+    position: relative;
+    left: 210px;
+    top: -145px;
+    font-size: 26px;
+}
+.footerRotate #univ1{    //대학1
+    position: absolute;
+    font-size: 18px;
+    margin-top: -133px;
+    margin-left:223px;
+}
+.footerRotate #univ1 #date{
+    position: relative;
+    
+}
+.footerRotate #univ1 #script{
+    position: relative;
+    top: -23px;
+    left: 120px;
+    width: 120px;
+}
+.footerRotate #univ2{    //대학2
+    position: absolute;
+    font-size: 18px;
+    margin-left:223px;
+}
+.footerRotate #univ2 #date{
+    position: relative;
+    width: 120px;
+    
+}
+.footerRotate #univ2 #script{
+    position: relative;
+    top: -23px;
+    left: 120px;
+    width: 120px;
+}
+.footerRotate #univ3{    //대학3
+    position: absolute;
+    font-size: 18px;
+    margin-left:223px;
+    width: 120px;
+}
+.footerRotate #univ3 #date{
+    position: relative;
+    
+}
+.footerRotate #univ3 #script{
     position: relative;
     top: -23px;
     left: 120px;
