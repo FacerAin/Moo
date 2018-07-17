@@ -13,7 +13,7 @@ body{
     border: solid red 1px;
 }
 header{
-    width: 700px;
+    width: 820px;
     height: 140px;
     margin: 0 auto;
 }
@@ -26,8 +26,8 @@ header #loaded1{
     margin-left: 280px;
 }
 #main{
-    width: 700px;
-    height: 700px;
+    width: 820px;
+    height: 825px;
 }
 #allTime{
     position: relative;
@@ -71,13 +71,13 @@ header #weather1 #degreeSta{
     width: 820px;
 }
 .imgRotate{
-    width: 820px;
-    margin-top: 50px;
+    width: 700px;
+    margin-top: 20px;
     height: 320px;
 }
 .imgRotate img{
     position: absolute;
-    width: 820px;
+    width: 700px;
     transition: all 2s;
 }
 .footerRotate>#cumchuk{
@@ -88,7 +88,8 @@ header #weather1 #degreeSta{
     left: 20px;
 }
 footer{
-    width: 700px;
+    width: 820px;
+    height: 400px;
     margin: 0 auto;
 }
 .footerRotate #cumchuk ul li{
@@ -106,47 +107,54 @@ footer{
 .footerRotate #cumchuk #dinner{
     font-size: 20px;
 }
+.footerRotate #cumchuk ul li:nth-child(1){
+    position: relative;
+    left: 50px;
+}
 .footerRotate #cumchuk ul li:nth-child(2){
     position: relative;
-    left: 80px;
+    left: 200px;
 }
 .footerRotate #cumchuk ul li:nth-child(3){
     position: relative;
-    left: 180px;
+    left: 330px;
+}
+#dDayPlan{
+    position: relative;
 }
 .title{
     position: relative;
     font-size: 30px;
-    top: 100px;
     left: 20px;
     font-weight: 700;
+    float: left;
 }
 #dDay1{
     position: relative;
+    float: left;
     font-size: 30px;
-    top: 68px;
-    left: 150px;
-    width: 300px;
+    margin-left: 70px;
+    width: 155px;
 }
 #dDay2{
     position: relative;
     font-size: 30px;
-    top: 35px;
-    left: 350px;
-    width: 200px;
+    float: left;
+    width: 195px;
+    margin-left: 50px;
 }
 #dDay1 #doomsDay1{
-    position: absolute;
+    position: relative;
     font-size: 30px;
-    left: 105px;
     top: 0px;
+    float: right;
     
 }
 #dDay2 #doomsDay2{
-    position: absolute;
+    position: relative;
     font-size: 30px;
-    top: 1px;
-    left: 165px;
+    top: 0px;
+    float: right;
 }
 .footerRotate #event{
     position: relative;

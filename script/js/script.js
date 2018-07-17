@@ -397,10 +397,8 @@ function volumeController(){
     var volumeControl=document.getElementById("videoPlayer");
     var time=getDateInit();
     volumeControl.volume=0;
-    console.log(time.getMinutes())
     if((time.getHours()>=23) && (time.getMinutes()>=2))
         {
-            console.log("fdsdfs");
             volumeControl.volume=1;
         }
     setTimeout('volumeController()',1000);

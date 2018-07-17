@@ -32,10 +32,9 @@ $(function(){
     function jQueryCalled(imgNum){
         console.log("jQueryCalled");
         imgCount=imgNum;
-        console.log(imgCount);
     }
     jQueryCall=jQueryCalled;
-    for(var imgord=1; imgord<=3; imgord++)
+    for(var imgord=1; imgord<=(imgCount+1); imgord++)
     {
         $("<img src=\"./../../img/"+imgord+".png\" alt=slide"+imgord+">").appendTo($(".imgRotate"));
     }
