@@ -10,8 +10,7 @@ function loader(){
     setInterval('doomsDayShow',72000000);//2시간 인터벌
     doomsDayShow1();
     setInterval('doomsDayShow1()',72000000);//2시간 인터벌
-    parseMealChecker();
-    setInterval('parseMealChecker()',10000);//10초 인터벌
+    parseMeal();
     eventDelay();
     getConfig();
     volumeController();
@@ -287,43 +286,98 @@ function doomsDayCal(){
   return lastDay;
   }
 }
-//급식 파싱. 2018.04.09 Lani
-function parseMealChecker(){
-    var virgin=true;
-    var firstExe=true;
-    var i;
-    var time=getDateInit();
-    if(time.getHours()>=19 && virgin){
-        parseMeal(1);
-        virgin=false;
-        return;
-    }
-    else if(i>=1080){
-        parseMeal(0);
-        i=0;
-        return;
-    }
-    else if(firstExe){
-        parseMeal(0);
-        firstExe=false;
-        return;
-    }
-    
+function parseMeal(){
+    breakfast();
+    days=getDateInit();
+    chYmd=days.getDate;
+    setTimeout(parseMeal, 100000);
 }
-function parseMeal(ary){
+function breakfast(){
             {
                   loadJSON(function(response)
                   {
                       var jsonData = JSON.parse(response);
-                      document.getElementById("breakfast").innerHTML=jsonData[ary]["아침"];
-                      document.getElementById("lunch").innerHTML=jsonData[ary]["점심"];
-                      document.getElementById("dinner").innerHTML=jsonData[ary]["저녁"];
+                      var dataArr = jsonData["메뉴"].split(",");
+                      var meal;
+                      for(var i=0; dataArr[i]!=null; i++){
+                          if(dataArr[i]!="우유"){
+                              meal+=dataArr[i]+"<br/>";
+                          }
+                      }
+                      document.getElementById("breakfast").innerHTML=meal;
                   });
 
             }
            function loadJSON(callback) //url의 json 데이터 불러오는 함수
            {
-              var url = "http://"+localIp+":53334";
+              //var url = "http://"+localIp+":53334";
+              var url = "http://wiki.daegeonlife.com/meals/meal_api_custom.php?countryCode=stu.cne.go.kr&schulCode=N100000151&insttNm=%EB%85%BC%EC%82%B0%EB%8C%80%EA%B1%B4%EA%B3%A0%EB%93%B1%ED%95%99%EA%B5%90&schulCrseScCode=4&schMmealScCode=1&schYmd=2018.07.19";
+              var request = new XMLHttpRequest();
+              request.overrideMimeType("application/json");
+              request.open('GET', url, true);
+              request.onreadystatechange = function ()
+              {
+                if (request.readyState == 4 && request.status == "200")
+                {
+                  callback(request.responseText);
+                }
+              };
+              request.send(null);
+          }
+}
+function lunch(){
+            {
+                  loadJSON(function(response)
+                  {
+                      var jsonData = JSON.parse(response);
+                      var dataArr = jsonData["메뉴"].split(",");
+                      var meal;
+                      for(var i=0; dataArr[i]!=null; i++){
+                          if(dataArr[i]!="우유"){
+                              meal+=dataArr[i]+"<br/>";
+                          }
+                      }
+                      document.getElementById("lunch").innerHTML=meal;
+                  });
+
+            }
+           function loadJSON(callback) //url의 json 데이터 불러오는 함수
+           {
+              //var url = "http://"+localIp+":53334";
+              var url = "http://wiki.daegeonlife.com/meals/meal_api_custom.php?countryCode=stu.cne.go.kr&schulCode=N100000151&insttNm=%EB%85%BC%EC%82%B0%EB%8C%80%EA%B1%B4%EA%B3%A0%EB%93%B1%ED%95%99%EA%B5%90&schulCrseScCode=4&schMmealScCode=2&schYmd=2018.07.19";
+              var request = new XMLHttpRequest();
+              request.overrideMimeType("application/json");
+              request.open('GET', url, true);
+              request.onreadystatechange = function ()
+              {
+                if (request.readyState == 4 && request.status == "200")
+                {
+                  callback(request.responseText);
+                }
+              };
+              request.send(null);
+          }
+}
+function dinner(){
+            {
+                  loadJSON(function(response)
+                  {
+                      var jsonData = JSON.parse(response);
+                      var dataArr = jsonData["메뉴"].split(",");
+                      var meal;
+                      for(var i=0; dataArr[i]!=null; i++){
+                          if(dataArr[i]!="우유"){
+                              meal+=dataArr[i]+"<br/>";
+                          }
+                      }
+                      document.getElementById("dinner").innerHTML=meal;
+                  });
+
+            }
+           function loadJSON(callback) //url의 json 데이터 불러오는 함수
+           {
+              //var url = "http://"+localIp+":53334";
+              var url = "http://wiki.daegeonlife.com/meals/meal_api_custom.php?countryCode=stu.cne.go.kr&schulCode=N100000151&insttNm=%EB%85%BC%EC%82%B0%EB%8C%80%EA%B1%B4%EA%B3%A0%EB%93%B1%ED%95%99%EA%B5%90&schulCrseScCode=4&schMmealScCode=3&schYmd=2018.07.19";
               var request = new XMLHttpRequest();
               request.overrideMimeType("application/json");
               request.open('GET', url, true);
