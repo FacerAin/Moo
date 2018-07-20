@@ -287,31 +287,34 @@ function doomsDayCal(){
   }
 }
 function parseMeal(){
-    breakfast();
+    a=breakfast();
+    console.log(a);
     days=getDateInit();
     chYmd=days.getDate;
     setTimeout(parseMeal, 100000);
 }
-function breakfast(){
+function breakfast(date){
+    var meal='';
+    date='2018.07.20'
             {
                   loadJSON(function(response)
                   {
                       var jsonData = JSON.parse(response);
                       var dataArr = jsonData["메뉴"].split(",");
-                      var meal;
                       for(var i=0; dataArr[i]!=null; i++){
                           if(dataArr[i]!="우유"){
                               meal+=dataArr[i]+"<br/>";
                           }
                       }
                       document.getElementById("breakfast").innerHTML=meal;
+                      return meal;
                   });
 
             }
            function loadJSON(callback) //url의 json 데이터 불러오는 함수
            {
               //var url = "http://"+localIp+":53334";
-              var url = "http://wiki.daegeonlife.com/meals/meal_api_custom.php?countryCode=stu.cne.go.kr&schulCode=N100000151&insttNm=%EB%85%BC%EC%82%B0%EB%8C%80%EA%B1%B4%EA%B3%A0%EB%93%B1%ED%95%99%EA%B5%90&schulCrseScCode=4&schMmealScCode=1&schYmd=2018.07.19";
+              var url = "http://wiki.daegeonlife.com/meals/meal_api_custom.php?countryCode=stu.cne.go.kr&schulCode=N100000151&insttNm=%EB%85%BC%EC%82%B0%EB%8C%80%EA%B1%B4%EA%B3%A0%EB%93%B1%ED%95%99%EA%B5%90&schulCrseScCode=4&schMmealScCode=1&schYmd="+date;
               var request = new XMLHttpRequest();
               request.overrideMimeType("application/json");
               request.open('GET', url, true);
@@ -319,11 +322,13 @@ function breakfast(){
               {
                 if (request.readyState == 4 && request.status == "200")
                 {
-                  callback(request.responseText);
+                  meal=callback(request.responseText);
                 }
               };
               request.send(null);
+              return meal;
           }
+    return meal;
 }
 function lunch(){
             {
