@@ -29,9 +29,10 @@ function loaderRotate(){
 }
 var imgCount;
 $(function(){
-    function jQueryCalled(imgNum){
+    function jQueryCalled(jAry){
         console.log("jQueryCalled");
-        imgCount=imgNum;
+        imgCount=jAry[0];
+        univCheck=jAry[1];
     }
     jQueryCall=jQueryCalled;
     for(var imgord=1; imgord<=(imgCount+1); imgord++)
