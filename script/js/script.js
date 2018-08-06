@@ -6,7 +6,7 @@ function loader(){
     parseWeather();
     parseNextWeather();
     setTimeout('videoPlayer()',3000)//비디오 플레이. 속성 받아오기위해 시간차.
-    doomsDayShow();
+    doomsDayInit();
     setInterval('doomsDayShow',72000000);//2시간 인터벌
     doomsDayShow1();
     setInterval('doomsDayShow1()',72000000);//2시간 인터벌
@@ -16,7 +16,7 @@ function loader(){
     volumeController();
 }
 function getDateInit(){
-    return new Date();//심심해서 만들어봄.
+    return new Date();
 }
 function getConfig(){
             {
@@ -136,7 +136,7 @@ function parseNextWeather(){
                       var month=today.getMonth()+1;
                       var year=today.getFullYear();
                       var day=today.getDate()+1;
-                      if(month<10)
+                      if(month<10)//내일의 12시 날씨를 알기 위함.
                       {
                           month="0"+month;
                       }
@@ -228,21 +228,19 @@ function videoPlayer(){
           videoPlayer.src = nextVideo[curVideo];
     }
 }
-function djkl(){
-  //두 날 사이의 차이를 계산
-  getSDay();
-  function calDiffDay(date) {
+function doomsDayInit(){
+    var fDiffDay=getSDay();
+    document.getElementById("doomsDay1").innerHTML = fDiffDay;
+}
+function calDiffDay(date) {
     var today = new Date();
     var timeDiff = date.getTime() - today.getTime();
     var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
-
     return diffDays;
   }
-
-  //수능이 몇일 인지 계산
-  function calSDay(year) {
+function calSDay(year) {
+    //수능이 11월 3째주 목요일임을 이용. 수능의 날짜를 계산.
     var sDay = new Date();
-
     sDay.setYear(year);
     sDay.setHours(0,0,0,0);
     sDay.setDate(13);
@@ -253,95 +251,55 @@ function djkl(){
       s=sDay.getDate();
     }
     return sDay;
-  }
-
-  //올해와 내년 수능까지 남은 날을 계산 만약 올해의 수능이 지났으면 내년과 내후년의 것을 계산
-  function getSDay() {
+}
+function getSDay() {
+    //올해와 내년 수능까지 남은 날을 계산. 만약 올해의 수능이 지났으면 내년과 내후년의 것을 계산
     var today = new Date();
-    var fDiffDay;
-    var sDiffDay;
-    var fSDay;
-    var sSDay;
-
+    var fDiffDay;//1번째 수능일 디데이
+    var sDiffDay;//재수 수능일 디데이
+    var fSDay;//1번째 수능일
+    var sSDay;//재수 수능일
     fSDay = calSDay(today.getFullYear());
     fDiffDay = calDiffDay(fSDay);
     console.log(fDiffDay);
     //날짜가 지났는지 확인
     if (fDiffDay > 0) {
-      sSDay = calSDay(today.getFullYear() + 1);
-      sDiffDay = calDiffDay(sSDay);
-      console.log(sDiffDay);
+        sSDay = calSDay(today.getFullYear() + 1);
+        sDiffDay = calDiffDay(sSDay);
+        console.log(sDiffDay);
     } else {
-      fSDay = calSDay(today.getFullYear() + 1);
-      fDiffDay = calDiffDay(fSDay);
-
-      sSday = calSDay(today.getFullYear() + 2);
-      fDiffDay = calDiffDay(sSday);
+        fSDay = calSDay(today.getFullYear() + 1);
+        fDiffDay = calDiffDay(fSDay);
+        sSday = calSDay(today.getFullYear() + 2);
+        fDiffDay = calDiffDay(sSday);
     }
-  }
-
-}
-function doomsDayShow(){
-    var doomsDay = null;
-    var textArea = $('#doomsDay1');
-    var today = getDateInit();
-    //D day가 저장되지 않았을 경우에는 실행시키고 저장되었을 경우에는 저장된 값으로 실행 날짜 변경시 새로 계산하는 코드는 어차피 스마트 미러가 꺼질꺼라 안넣음
-    if(doomsDay === null){
-
-        doomsDay = doomsDayCal(0);
-        var timeDiff = doomsDay.getTime() - today.getTime();
-        //만약 수능이 지나고 난뒤 12월달 정도에는 D day 값이 음수로 반환될테니 그럴경우 내년으로 계산
-    if(timeDiff<0){
-      doomsDay = doomsDayCal(1);
-      timeDiff = doomsDay.getTime() - today.getTime();
-    }
-    var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
-    textArea.text(diffDays);
-    }
-    // 수능까지 남은 날을 계산하는 코드 islasted parameter는 연도가 지난건지 아닌지 확인
-    function doomsDayCal(isLasted){
-      //오늘 날짜를 불러와 연도를 변경. 만약 수능 날짜가 지나지 않으면 올해 그대로 지났다면 1년 추가
-      var lastDay = new Date();
-      var year = lastDay.getFullYear() + isLasted;
-      lastDay.setYear(year);
-      lastDay.setHours(0, 0, 0, 0);
-      lastDay.setDate(1)
-      lastDay.setMonth(10);
-    //getDay 함수는 요일을 반환하는 함수. 오늘의 날짜가 목요일이 될때까지 하루씩 추가.
-        //var thursday = 4; 불필요한 변수 생성
-    while(lastDay.getDay() != 4) {
-        lastDay.setDate(lastDay.getDate() + 1);
-    }
-    // 수능은 11월 3째주 목요일임으로 2주를 추가
-    lastDay.setDate(lastDay.getDate() + 14);
-      return lastDay;
-      }
+    return fDiffDay;
 }
 function doomsDayShow1(){
 
-var doomsDay = null;
-var textArea = $('#doomsDay2');
-var today = getDateInit();
-textArea.fadeIn();
-//D day가 저장되지 않았을 경우에는 실행시키고 저장되었을 경우에는 저장된 값으로 실행 날짜 변경시 새로 계산하는 코드는 어차피 스마트 미러가 꺼질꺼라 안넣음
-if(doomsDay === null){
+    var doomsDay = null;
+    var textArea = $('#doomsDay2');
+    var today = getDateInit();
+    textArea.fadeIn();
+    //D day가 저장되지 않았을 경우에는 실행시키고 저장되었을 경우에는 저장된 값으로 실행 날짜 변경시 새로 계산하는 코드는 어차피 스마트 미러가 꺼질꺼라 안넣음
+    if(doomsDay === null){
+        doomsDay = doomsDayCal();
+        var timeDiff = doomsDay.getTime() - today.getTime();
+        var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
 
-doomsDay = doomsDayCal();
-var timeDiff = doomsDay.getTime() - today.getTime();
-var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
-
-textArea.text(diffDays);
-}
+        textArea.text(diffDays);
+    }
 //7월 28일
-function doomsDayCal(){
-  //오늘 날짜를 불러와 연도를 변경.
-  var lastDay = new Date();
-  lastDay.setHours(0, 0, 0, 0);
-  lastDay.setDate(28)
-  lastDay.setMonth(6);
-  return lastDay;
-  }
+    function doomsDayCal(){
+        //오늘 날짜를 불러와 연도를 변경.
+        var lastDay = new Date();
+        lastDay.setHours(0, 0, 0, 0);
+        lastDay.setDate(28)
+        lastDay.setMonth(6);
+        return lastDay;
+    }
 }
+
 function parseMeal(){
     day=days.getDate;
     chymd=day.getFullYear()+'.'+'';
@@ -425,7 +383,7 @@ function event(){
            function loadJSON(callback) //url의 json 데이터 불러오는 함수
            {
               var url = "http://"+localIp+":53333";
-              var request = new XMLHttpRequest();;
+              var request = new XMLHttpRequest();
               request.overrideMimeType("application/json");
               request.open('GET', url, true);
               request.onreadystatechange = function ()
