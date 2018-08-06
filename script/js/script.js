@@ -125,8 +125,8 @@ function parseWeather(){
 }
 function parseNextWeather(){
             {
-                
-                  
+
+
                   loadJSON(function(response)
                   {
                       var jsonData=JSON.parse(response);
@@ -215,7 +215,7 @@ function videoPlayer(){
     var nextVideo=[];
     for(var i=1; i<=videoCount; i++)
         {
-            
+
             nextVideo.push(mediaRoot+i+".mp4");
         }
     var videoPlayer = document.getElementById('videoPlayer');
@@ -226,7 +226,60 @@ function videoPlayer(){
          curVideo = 0;
        }
           videoPlayer.src = nextVideo[curVideo];
-    }   
+    }
+}
+function djkl(){
+  //두 날 사이의 차이를 계산
+  getSDay();
+  function calDiffDay(date) {
+    var today = new Date();
+    var timeDiff = date.getTime() - today.getTime();
+    var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+    return diffDays;
+  }
+
+  //수능이 몇일 인지 계산
+  function calSDay(year) {
+    var sDay = new Date();
+
+    sDay.setYear(year);
+    sDay.setHours(0,0,0,0);
+    sDay.setDate(13);
+    sDay.setMonth(10);
+
+    while (sDay.getDay() != 4) {
+      sDay.setDate(sDay.getDate() + 1);
+      s=sDay.getDate();
+    }
+    return sDay;
+  }
+
+  //올해와 내년 수능까지 남은 날을 계산 만약 올해의 수능이 지났으면 내년과 내후년의 것을 계산
+  function getSDay() {
+    var today = new Date();
+    var fDiffDay;
+    var sDiffDay;
+    var fSDay;
+    var sSDay;
+
+    fSDay = calSDay(today.getFullYear());
+    fDiffDay = calDiffDay(fSDay);
+    console.log(fDiffDay);
+    //날짜가 지났는지 확인
+    if (fDiffDay > 0) {
+      sSDay = calSDay(today.getFullYear() + 1);
+      sDiffDay = calDiffDay(sSDay);
+      console.log(sDiffDay);
+    } else {
+      fSDay = calSDay(today.getFullYear() + 1);
+      fDiffDay = calDiffDay(fSDay);
+
+      sSday = calSDay(today.getFullYear() + 2);
+      fDiffDay = calDiffDay(sSday);
+    }
+  }
+
 }
 function doomsDayShow(){
     var doomsDay = null;
