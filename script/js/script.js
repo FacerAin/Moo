@@ -276,7 +276,6 @@ function getSDay() {
     return fDiffDay;
 }
 function doomsDayShow1(){
-
     var doomsDay = null;
     var textArea = $('#doomsDay2');
     var today = getDateInit();
@@ -301,16 +300,24 @@ function doomsDayShow1(){
 }
 
 function parseMeal(){
-    day=days.getDate;
-    chymd=day.getFullYear()+'.'+'';
-    mealRe(date, 1);
-    mealRe(date, 2);
-    mealRe(date, 3);
+    day=getDateInit();
+    a=day.getMonth()+1;
+    console.log(a);
+    if(a<10){
+        chymd=day.getFullYear()+'.0'+(day.getMonth()+1)+'.'+day.getDate()+'';
+        console.log('11');
+    }else{
+        chymd=day.getFullYear()+'.'+(day.getMonth()+1)+'.'+day.getDate()+'';
+        console.log('22');
+    }
+    console.log(chymd);
+    mealRe(chymd, 1);
+    mealRe(chymd, 2);
+    mealRe(chymd, 3);
     setTimeout(parseMeal, 100000);
 }//날짜에 따라 재활용
 function mealRe(date, time){
     var meal='';
-    date='2018.07.20'
             {
                   loadJSON(function(response)
                   {
@@ -321,7 +328,13 @@ function mealRe(date, time){
                               meal+=dataArr[i]+"<br/>";
                           }
                       }
-                      document.getElementById("breakfast").innerHTML=meal;
+                      if(time==1){
+                          document.getElementById("breakfast").innerHTML=meal;
+                      }else if(time==2){
+                          document.getElementById("lunch").innerHTML=meal;
+                      }else if(time==3){
+                          document.getElementById("dinner").innerHTML=meal;
+                      }
                       this.meal=meal;
                   });
 
