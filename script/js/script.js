@@ -233,6 +233,7 @@ function doomsDayInit(){
     document.getElementById("doomsDay1").innerHTML = fDiffDay;
 }
 function calDiffDay(date) {
+    //파라미터와 현재의 디데이 계산.
     var today = new Date();
     var timeDiff = date.getTime() - today.getTime();
     var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
@@ -276,6 +277,7 @@ function getSDay() {
     return fDiffDay;
 }
 function doomsDayShow1(){
+    //사관학교 디데이 계산
     var doomsDay = null;
     var textArea = $('#doomsDay2');
     var today = getDateInit();
@@ -305,10 +307,8 @@ function parseMeal(){
     console.log(a);
     if(a<10){
         chymd=day.getFullYear()+'.0'+(day.getMonth()+1)+'.'+day.getDate()+'';
-        console.log('11');
     }else{
         chymd=day.getFullYear()+'.'+(day.getMonth()+1)+'.'+day.getDate()+'';
-        console.log('22');
     }
     console.log(chymd);
     mealRe(chymd, 1);

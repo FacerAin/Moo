@@ -28,7 +28,6 @@ $table=$dom->getElementsByTagName('table');
 $tbody=$table->item(0)->getElementsByTagName('tbody');
 $rows=$tbody->item(0)->getElementsByTagName('tr');
 $cols=$rows->item(1)->getElementsByTagName('td');
-
 // reset date format
 $schYmd=str_replace(".", "-", $schYmd);
 
@@ -36,7 +35,7 @@ $schYmd=str_replace(".", "-", $schYmd);
 $day=date('w', strtotime($schYmd));
 
 // check blank has values
-if($cols->item($day)->nodeValue==null){
+if($cols->item($day)->  nodeValue==null){
     echo '';
 }else{
     $final=$cols->item($day)->nodeValue;
@@ -47,7 +46,6 @@ $final=preg_replace("/[0-9]/", "", $final);
 
 $string = $final;
 $str_ary = preg_split("/[.]/", $string );
-
 $str_uni = array_unique($str_ary);
 
 $str_temp = "";
@@ -65,7 +63,14 @@ for($i=0; $i<count($str_ary); $i++){
   $str_temp_num = mb_strlen(trim($str_temp))-1;
   $str_temp = mb_substr($str_temp, 0, $str_temp_num);
   $final=$str_temp;
+  $loc=strpos($final,'밥',0);
 
+  $tmp=substr($final,0,$loc+3);
+$heelyHan=substr($final,$loc+3);
+$final='';
+$final .= $tmp;
+$final .= ',';
+$final .= $heelyHan;
 // change code number to text
 if($schulCrseScCode==1){
     $schulCrseScCode="유치원";
