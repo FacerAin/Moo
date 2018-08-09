@@ -108,16 +108,19 @@ footer{
     font-size: 20px;
 }
 .footerRotate #cumchuk ul li:nth-child(1){
-    position: relative;
-    left: 50px;
+    position: absolute;
+    left: -30px;
+    width: 300px;
 }
 .footerRotate #cumchuk ul li:nth-child(2){
-    position: relative;
-    left: 200px;
+    position: absolute;
+    left: 230px;
+    width: 300px;
 }
 .footerRotate #cumchuk ul li:nth-child(3){
-    position: relative;
-    left: 330px;
+    position: absolute;
+    left: 500px;
+    width: 300px;
 }
 #dDayPlan{
     position: relative;

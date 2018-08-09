@@ -65,12 +65,16 @@ for($i=0; $i<count($str_ary); $i++){
   $final=$str_temp;
   $loc=strpos($final,'밥',0);
 
+
   $tmp=substr($final,0,$loc+3);
 $heelyHan=substr($final,$loc+3);
 $final='';
 $final .= $tmp;
 $final .= ',';
 $final .= $heelyHan;
+if($final==','){
+    $final='';
+}
 // change code number to text
 if($schulCrseScCode==1){
     $schulCrseScCode="유치원";
