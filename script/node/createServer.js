@@ -12,7 +12,6 @@ const SCOPES = ['https://www.googleapis.com/auth/calendar.readonly'];
 const TOKEN_PATH = 'credentials.json';
 const jsesc = require('jsesc');
 var eventString = '';
-var mealString = '';
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
  * given callback function.
@@ -23,7 +22,6 @@ var mealString = '';
    if (err) return console.log('Error loading client secret file:', err);
    // Authorize a client with credentials, then call the Google Drive API.
    authorize(JSON.parse(content), listEvents);
-   authorize(JSON.parse(content), listMeals);
  });
 
 function authorize(credentials, callback) {
@@ -77,53 +75,6 @@ function getAccessToken(oAuth2Client, callback) {
  * Lists the next 6 events on the user's meal calendar.
  * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
  */
-function listMeals(auth) {
-  const calendar = google.calendar({
-    version: 'v3',
-    auth
-  });
-  calendar.events.list({
-    calendarId: '1u66hlmljmnnccnqsafh73vkro@group.calendar.google.com',
-    timeMin: (new Date()).toISOString(),
-    maxResults: 6,
-    singleEvents: true,
-    orderBy: 'startTime',
-  }, (err, {
-    data
-  }) => {
-    if (err) return console.log('The API returned an error: ' + err);
-
-    mealString = jsesc('[');
-    var eventDay = null;
-
-    const events = data.items;
-    if (events.length) {
-      console.log('loading events');
-      events.map((event, i) => {
-        const start = event.start.dateTime || event.start.date;
-
-        if(eventDay==null){
-          eventDay = start;
-          mealString = mealString + jsesc('{"date":"') + start + jsesc('","') + event.summary + jsesc('":"') + event.description + jsesc('"')
-        }else if(eventDay != start){
-          eventDay = start;
-          mealString = mealString + jsesc('},{"date":"') + start + jsesc('","') + event.summary + jsesc('":"') + event.description + jsesc('"');
-        }else{
-        mealString = mealString + jsesc(',"') + event.summary + jsesc('":"') + event.description +jsesc('"') ;
-      }
-      });
-    } else {
-      console.log('No upcoming events found.');
-    }
-    mealString = mealString + jsesc('}]');
-    /* 파일 형식으로 출력 하는 코드
-    var today = new Date();
-    fileName = today.getFullYear() + "_" + (today.getMonth() + 1) + "_" + today.getDate();
-    fs.writeFileSync(fileName + '_meal.json', mealString, 'utf8');
-    */
-  });
-}
-
 function listEvents(auth) {
   const calendar = google.calendar({
     version: 'v3',
@@ -143,7 +94,7 @@ function listEvents(auth) {
 
     eventString = jsesc('[');
     if (events.length) {
-      console.log('loading meals');
+      console.log('loading events');
       events.map((event, i) => {
         const start = event.start.dateTime || event.start.date;
         eventString = eventString + jsesc('{"date":"') + start + jsesc('","summary":"') + event.summary + jsesc('"},');
@@ -171,19 +122,6 @@ http.createServer(function (request, response){
   response.end(eventString);
 }).listen(53333, function(){
   console.log('server port 53333 is for event');
-});
-
-http.createServer(function (request, response){
-  response.writeHead(200, { "Content-Type": "application/json; charset=utf-8",
-    "Access-Control-Allow-Origin": "*"
-});
-  fs.readFile('client_secret.json', (err, content) => {
-    if (err) return console.log('Error loading client secret file:', err);
-    authorize(JSON.parse(content), listMeals);
-  });
-  response.end(mealString);
-}).listen(53334, function(){
-  console.log('server port 53334 is for meal');
 });
 
 http.createServer(function (request,  response){
