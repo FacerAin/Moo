@@ -62,6 +62,9 @@ function imgRotate(){
 }
 function univ(cho){
     if(cho==1){
-        $("<div id=\"univPlan\"><b>입시설명회</b></div><div id=\"univ1\"><div id=\"date\">Loading</div><div id=\"script\">Loading</div></div><div id=\"univ2\"><div id=\"date\">Loading</div><div id=\"script\">Loading</div></div><div id=\"univ3\"><div id=\"date\">Loading</div><div id=\"script\">Loading</div></div>").appendTo($(university));
+        $("<div id=\"univPlan\"><b>입시설명회</b></div><div id=\"univ1\"><div id=\"date\">Loading</div><div id=\"script\">Loading</div></div><div id=\"univ2\"><div id=\"date\">Loading</div><div id=\"script\">Loading</div></div><div id=\"univ3\"><div id=\"date\">Loading</div><div id=\"script\">Loading</div></div>").appendTo($('#university'));
+    }
+    else{
+        $("<iframe id=\"cal\" src=\"https://calendar.google.com/calendar/embed?src=9g11330b8eqphhgrd0nnapved0%40group.calendar.google.com&ctz=Asia%2FSeoul\" scrolling=\"no\"></iframe>").appendTo($('#event'));
     }
 }
