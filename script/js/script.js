@@ -1,6 +1,7 @@
 ﻿var localIp="localhost";//node.js 주소
 jQueryCall=null;//js로 jQuery를 실행하기 위함.
 var mp4Count;
+var univCho;
 function loader(){
     timer();
     parseWeather();
@@ -25,12 +26,13 @@ function getConfig(){
                       var jsonData = JSON.parse(response);
                       mp4Count=jsonData["mp4Count"];
                       pngCount=jsonData["pngCount"];
-                      univCheck=jsondata["UnivCheck"];
+                      univCheck=jsonData["UnivCheck"];
                       console.log("MP4COUNT_"+mp4Count);
                       console.log("PNGCOUNT_"+pngCount);
                       console.log("UNIVCHECK_"+univCheck);
                       jAry=[pngCount, univCheck];
                       jQueryCall(jAry);
+                      univCho=univCheck;
                   });
 
             }
@@ -384,13 +386,15 @@ function event(){
                       document.querySelector("#event2 #script2").innerHTML=commonData[1]["summary"];
                       document.querySelector("#event3 #date3").innerHTML=commonData[2]["date"]+"&nbsp;|";
                       document.querySelector("#event3 #script3").innerHTML=commonData[2]["summary"];
+                      if(univCho){
                       document.querySelector("#univ1 #date").innerHTML=univData[0]["date"]+"&nbsp;|";
                       document.querySelector("#univ1 #script").innerHTML=univData[0]["summary"];
                       document.querySelector("#univ2 #date").innerHTML=univData[1]["date"]+"&nbsp;|";
                       document.querySelector("#univ2 #script").innerHTML=univData[1]["summary"];
                       document.querySelector("#univ3 #date").innerHTML=univData[2]["date"]+"&nbsp;|";
-                      document.querySelector("#univ3 #script").innerHTML=univData[2]["summary"];
-                  });
+                      document.querySelector("#univ3 #script").innerHTML=univData[2]["summary"];    
+                      }
+                                        });
 
             }
            function loadJSON(callback) //url의 json 데이터 불러오는 함수

@@ -33,12 +33,14 @@ $(function(){
         console.log("jQueryCalled");
         imgCount=jAry[0];
         univCheck=jAry[1];
+        univ(univCheck);
     }
     jQueryCall=jQueryCalled;
     for(var imgord=1; imgord<=(imgCount+1); imgord++)
     {
         $("<img src=\"./../../img/"+imgord+".png\" alt=slide"+imgord+">").appendTo($(".imgRotate"));
     }
+    
 });
 var index=0;
 var imgCount=2;
@@ -57,4 +59,9 @@ function imgRotate(){
         index++;
     }
     setTimeout('imgRotate()',timeDelay);
+}
+function univ(cho){
+    if(cho==1){
+        $("<div id=\"univPlan\"><b>입시설명회</b></div><div id=\"univ1\"><div id=\"date\">Loading</div><div id=\"script\">Loading</div></div><div id=\"univ2\"><div id=\"date\">Loading</div><div id=\"script\">Loading</div></div><div id=\"univ3\"><div id=\"date\">Loading</div><div id=\"script\">Loading</div></div>").appendTo($(university));
+    }
 }

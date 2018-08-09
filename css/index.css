@@ -272,6 +272,11 @@ footer{
     top: -23px;
     left: 120px;
 }
+#cal{
+    margin-top: -320px;
+    height: 360px;
+    width: 815px;
+}
 footer .powered{
     position: absolute;
     top: 1330px;
