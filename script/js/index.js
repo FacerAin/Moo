@@ -49,6 +49,9 @@ $(".imgRotate img").eq(index).css("left","0");
 index++;
 setTimeout('imgRotate()',timeDelay);
 function imgRotate(){
+    if(imgCount == 1){
+        return;
+    }
     if(index==imgCount){
         $(".imgRotate img").eq(index-1).css("left","-700px");
         $(".imgRotate img").eq(index-imgCount).css("left","0");

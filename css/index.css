@@ -71,7 +71,7 @@ header #weather1 #degreeSta{
     width: 820px;
 }
 .imgRotate{
-    width: 700px;
+    width: 820px;
     margin-top: 20px;
     height: 320px;
 }
@@ -155,8 +155,9 @@ footer{
 }
 #dDay2 #doomsDay2{
     position: relative;
+    left: 20px;
     font-size: 30px;
-    top: 0px;
+    top: -35px;
     float: right;
 }
 .footerRotate #event{
@@ -217,10 +218,37 @@ footer{
     top: -23px;
     left: 120px;
 }
-.footerRotate #university{
+.footerRotate #newBoard{
+    font-size: 18px;
+    margin-top: -25px;
+    margin-left: 20px;
+}
+.footerRotate #newBoard #nbTitle{
+    position: relative;
+    font-size: 23px;
+    font-weight: 700;
+    top:-30px;
+    left: 20px;
+}
+.footerRotate #newBoard #nb1{
+    position: relative;
+    top:-20px;
+    left:50px;
+}
+.footerRotate #newBoard #nb2{
+    position: relative;
+    top:0px;
+    left: 50px;
+}
+.footerRotate #newBoard #nb3{
+    position: relative;
+    top:20px;
+    left: 50px;
+}
+.footerRotate #university{//대학 입시설명회 일정. 필요하면 다시 위로 끌어올리셈
     position: relative;
     left: -200px;
-    top: 80px;
+    top: 800px;
 }
 .footerRotate #univPlan{
     position: relative;
